@@ -1,0 +1,9 @@
+# Mo phong vi mo giao thong do thi da tac tu
+build/
+.vs/
+out/
+CMakeUserPresets.json
+*.user
+*.exe
+*.pdb
+*.obj
