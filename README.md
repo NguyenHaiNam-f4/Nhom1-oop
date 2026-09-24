@@ -1,6 +1,6 @@
 # Mô phỏng vi mô giao thông đô thị đa tác tử
 
-Đồ án OOP: SFML 2.x, C++17, State / Observer / Composite, `std::thread` + `std::mutex`.
+Đồ án OOP: SFML 3.x, C++17, State / Observer / Composite, `std::thread` + `std::mutex`.
 
 ## Cấu trúc
 
@@ -12,24 +12,35 @@
 | `Vehicle` (`Car`, `Motorcycle`) | Tác tử: mỗi xe một luồng, bám xe trước, phanh đèn đỏ |
 | `Simulation` | Vòng lặp SFML, spawn xe, vẽ |
 
-## Build (Windows)
+## Build (Windows - MSYS2 UCRT64)
 
-Cài [SFML 2.6](https://www.sfml-dev.org/download.php) hoặc vcpkg:
+Cài [MSYS2](https://www.msys2.org/), mở terminal **UCRT64**, sau đó cài compiler,
+CMake và SFML:
 
-```bat
-vcpkg install sfml:x64-windows
-cmake -B build -DCMAKE_TOOLCHAIN_FILE=[đường-dẫn-vcpkg]/scripts/buildsystems/vcpkg.cmake
+```bash
+pacman -S --needed mingw-w64-ucrt-x86_64-toolchain \
+  mingw-w64-ucrt-x86_64-cmake \
+  mingw-w64-ucrt-x86_64-sfml
+```
+
+Từ thư mục gốc của dự án:
+
+```bash
+cmake -S . -B build -G "MinGW Makefiles"
 cmake --build build --config Release
 ```
 
-SFML giải nén thủ công:
+Chạy:
 
-```bat
-cmake -B build -DSFML_DIR="C:/SFML/lib/cmake/SFML"
-cmake --build build --config Release
+```bash
+./build/urban_traffic.exe
 ```
 
-Chạy `build/Release/urban_traffic.exe` (copy DLL SFML cùng thư mục nếu chưa tự copy).
+## Chạy bằng VS Code
+
+Mở thư mục dự án trong VS Code và cài extension **C/C++** của Microsoft.
+Nhấn `F5`, sau đó chọn cấu hình `Run Urban Traffic`. VS Code sẽ tự configure,
+build và chạy chương trình.
 
 ## Linux
 
