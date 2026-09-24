@@ -1,53 +1,46 @@
-# Mô phỏng vi mô giao thông đô thị đa tác tử
+# Urban Traffic Simulation
 
-Đồ án OOP: SFML 3.x, C++17, State / Observer / Composite, `std::thread` + `std::mutex`.
+Dự án mô phỏng giao thông đô thị bằng C++ + SFML.
 
-## Cấu trúc
+## Chạy nhanh trên Windows
 
-| Thành phần | Vai trò |
-|---|---|
-| `IObserver` / `ISubject` | Observer: đèn (Subject) báo xe (Observer) khi đổi màu |
-| `GreenState` / `YellowState` / `RedState` | State: vòng đời đèn xanh → vàng → đỏ |
-| `RoadNetwork` / `Lane` / `Intersection` | Composite: mạng đường chứa làn và nút giao |
-| `Vehicle` (`Car`, `Motorcycle`) | Tác tử: mỗi xe một luồng, bám xe trước, phanh đèn đỏ |
-| `Simulation` | Vòng lặp SFML, spawn xe, vẽ |
-
-## Build (Windows - MSYS2 UCRT64)
-
-Cài [MSYS2](https://www.msys2.org/), mở terminal **UCRT64**, sau đó cài compiler,
-CMake và SFML:
+### 1) Cài đặt toolchain cần thiết
+Cài đặt MSYS2 rồi mở terminal MSYS2 UCRT64 và chạy:
 
 ```bash
-pacman -S --needed mingw-w64-ucrt-x86_64-toolchain \
-  mingw-w64-ucrt-x86_64-cmake \
-  mingw-w64-ucrt-x86_64-sfml
+pacman -S --needed mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-sfml
 ```
 
-Từ thư mục gốc của dự án:
+### 2) Mở project trong VS Code
+Mở thư mục dự án trong VS Code.
 
-```bash
-cmake -S . -B build -G "MinGW Makefiles"
-cmake --build build --config Release
+### 3) Chạy bằng F5
+Nhấn `F5`, rồi chọn cấu hình:
+
+```text
+Run Urban Traffic
 ```
 
-Chạy:
+VS Code sẽ build và mở chương trình.
 
-```bash
-./build/urban_traffic.exe
+## Nếu muốn chạy thủ công
+Trong terminal PowerShell hoặc terminal của VS Code, chạy:
+
+```powershell
+$env:Path = "C:\msys64\ucrt64\bin;$env:Path"
+g++.exe -std=c++17 -Iinclude src/*.cpp -o urban_traffic.exe -lsfml-graphics -lsfml-window -lsfml-system
+.\urban_traffic.exe
 ```
 
-## Chạy bằng VS Code
+## Tính năng chính
+- Đèn giao thông có trạng thái xanh - vàng - đỏ
+- Xe di chuyển theo làn, tránh xe phía trước
+- Xe dừng khi đèn đỏ hoặc vàng gần vạch dừng
+- Mô phỏng dạng đơn giản nhưng theo hướng OOP
 
-Mở thư mục dự án trong VS Code và cài extension **C/C++** của Microsoft.
-Nhấn `F5`, sau đó chọn cấu hình `Run Urban Traffic`. VS Code sẽ tự configure,
-build và chạy chương trình.
+## Thoát chương trình
+- Nhấn `ESC`
+- Hoặc đóng cửa sổ
 
-## Linux
-
-```bash
-sudo apt install libsfml-dev cmake g++
-cmake -B build && cmake --build build
-./build/urban_traffic
-```
-
-ESC hoặc đóng cửa sổ để thoát.
+## Ghi chú
+Dự án này dùng SFML và compiler MinGW/MSYS2 trên Windows. Vì vậy, nếu máy chưa có MSYS2/UCRT64 và SFML thì project sẽ không chạy được.

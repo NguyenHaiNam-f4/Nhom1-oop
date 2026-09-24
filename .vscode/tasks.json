@@ -1,60 +1,42 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Run Urban Traffic",
-            "type": "shell",
-            "command": "${workspaceFolder}\\urban_traffic.exe",
-            "options": {
-                "cwd": "${workspaceFolder}",
-                "env": {
-                    "Path": "C:\\msys64\\ucrt64\\bin;${env:Path}"
-                }
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "CMake: configure",
-            "type": "shell",
-            "command": "C:\\msys64\\ucrt64\\bin\\cmake.exe",
-            "args": [
-                "-S",
-                "${workspaceFolder}",
-                "-B",
-                "${workspaceFolder}\\build",
-                "-G",
-                "MinGW Makefiles"
-            ],
-            "options": {
-                "env": {
-                    "Path": "C:\\msys64\\ucrt64\\bin;${env:Path}"
-                }
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "CMake: build",
-            "type": "shell",
-            "command": "C:\\msys64\\ucrt64\\bin\\cmake.exe",
-            "args": [
-                "--build",
-                "${workspaceFolder}\\build",
-                "--config",
-                "Release"
-            ],
-            "options": {
-                "env": {
-                    "Path": "C:\\msys64\\ucrt64\\bin;${env:Path}"
-                }
-            },
-            "dependsOn": "CMake: configure",
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Urban Traffic",
+      "type": "shell",
+      "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+      "args": [
+        "-std=c++17",
+        "-I${workspaceFolder}\\include",
+        "${workspaceFolder}\\src\\*.cpp",
+        "-o",
+        "${workspaceFolder}\\urban_traffic.exe",
+        "-lsfml-graphics",
+        "-lsfml-window",
+        "-lsfml-system"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "Path": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
         }
-    ]
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Run Urban Traffic",
+      "type": "shell",
+      "command": "${workspaceFolder}\\urban_traffic.exe",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "Path": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
+        }
+      },
+      "dependsOn": "Build Urban Traffic",
+      "problemMatcher": []
+    }
+  ]
 }

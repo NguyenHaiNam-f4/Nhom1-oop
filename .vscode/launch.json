@@ -1,31 +1,31 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Urban Traffic",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\urban_traffic.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [
         {
-            "name": "Run Urban Traffic",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}\\build\\urban_traffic.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [
-                {
-                    "name": "PATH",
-                    "value": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
-                }
-            ],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
-            "preLaunchTask": "CMake: build",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
+          "name": "PATH",
+          "value": "C:\\msys64\\ucrt64\\bin;${env:PATH}"
         }
-    ]
+      ],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+      "preLaunchTask": "Build Urban Traffic",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
 }
